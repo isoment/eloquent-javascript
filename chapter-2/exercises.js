@@ -29,26 +29,25 @@ const loopTriangle = () => {
     for numbers that are divisible by both 3 and 5 (and still print "Fizz" or
     "Buzz" for numbers divisible by only one of those).
 */
-const fizzBuzz = () => {
+const fizzBuzzToOneHundred = () => {
     let i = 1;
-
     while (i <= 100) {
-        if (i % 3 === 0 && i % 5 === 0) {
-            console.log('FizzBuzz');
-            i++;
-        } else if (i % 3 === 0) {
-            console.log('Fizz');
-            i++;
-        } else if (i % 5 === 0) {
-            console.log('Buzz');
-            i++
-        } else {
-            console.log(i);
-            i++;
-        }
+        console.log(fizzBuzz(i));
+        i++;
     }
 }
-// fizzBuzz();
+const fizzBuzz = (number) => {
+    if (number % 3 === 0 && number % 5 === 0) {
+        return 'FizzBuzz';
+    } else if (number % 3 === 0) {
+        return 'Fizz';
+    } else if (number % 5 === 0) {
+        return 'Buzz';
+    } else {
+        return number
+    }
+}
+// fizzBuzzToOneHundred();
 
 
 /*
@@ -75,15 +74,15 @@ const chessBoard = (size) => {
     let oddLine = true;
 
     for (let i = 1; i <= size; i++) {
-        for (let i = 1; i <= size; i++) {
+        for (let j = 1; j <= size; j++) {
             if (oddLine) {
-                if (i % 2 !== 0) {
+                if (j % 2 !== 0) {
                     chessBoard += " ";
                 } else {
                     chessBoard += "#";
                 }
             } else {
-                if (i % 2 !== 0) {
+                if (j % 2 !== 0) {
                     chessBoard += "#";
                 } else {
                     chessBoard += " ";
@@ -91,9 +90,11 @@ const chessBoard = (size) => {
             }
         }
         oddLine = !oddLine;
-        chessBoard = chessBoard + '\n';
+        chessBoard += '\n';
     }
 
     return chessBoard;
 }
-console.log(chessBoard(14));
+// console.log(chessBoard(8));
+
+export { loopTriangle, fizzBuzzToOneHundred, fizzBuzz, chessBoard };

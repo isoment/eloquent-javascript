@@ -1,0 +1,41 @@
+Installing jest...
+
+    npm init -y
+
+    npm i --save-dev jest
+
+To use modules script tags must have...
+
+    type="module"
+
+For jest to recognize es6 modules...
+
+    Make sure babel-jest is installed or...
+
+        npm install --save-dev babel-jest
+
+    Add the following to package.json...
+
+        "jest": {
+            "transform": {
+                "^.+\\.[t|j]sx?$": "babel-jest"
+            }
+        }
+
+    Create a file...
+
+        babel.config.json
+
+    Add the following to it...
+
+        {
+            "presets": ["@babel/preset-env"]
+        }
+
+    Run the following to enable preset for transforms...
+
+        npm install @babel/preset-env --save-dev
+
+We can now run tests with...
+
+    npm test
