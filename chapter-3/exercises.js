@@ -82,9 +82,10 @@ const countChar = (string, searchChar) => {
     }
     return count;
 }
-
 const countingBs = (string) => {
-    return `There are ${countChar(string, 'B')} B's in '${string}'`;
+    return `B occurs ${countChar(string, 'B')} times in '${string}'`;
 }
-
 console.log(countingBs('jVBBHdiBjdBbIaoBksBBNBBoBLbOi'));
+
+
+export { minimum, isEven, countChar, countingBs };
