@@ -74,19 +74,19 @@ const chessBoard = (size) => {
     let chessBoard = "";
     let oddLine = true;
 
-    for (let i = 1; i <= 8; i++) {
-        for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= size; i++) {
+        for (let i = 1; i <= size; i++) {
             if (oddLine) {
                 if (i % 2 !== 0) {
-                    chessBoard = chessBoard + " ";
+                    chessBoard += " ";
                 } else {
-                    chessBoard = chessBoard + "#";
+                    chessBoard += "#";
                 }
             } else {
                 if (i % 2 !== 0) {
-                    chessBoard = chessBoard + "#";
+                    chessBoard += "#";
                 } else {
-                    chessBoard = chessBoard + " ";
+                    chessBoard += " ";
                 }
             }
         }
@@ -96,4 +96,4 @@ const chessBoard = (size) => {
 
     return chessBoard;
 }
-console.log(chessBoard(8));
+console.log(chessBoard(14));
