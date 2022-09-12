@@ -1,4 +1,13 @@
-import { range, sum, rangeWithStep, arrayToList, listToArray, prepend } from "./exercises";
+import { 
+    range, 
+    sum, 
+    rangeWithStep, 
+    arrayToList, 
+    listToArray, 
+    prepend, 
+    nth, 
+    nthRecursive 
+} from "./exercises";
 
 describe("chapter 4 exercises", () => {
     describe("exercise one", () => {
@@ -89,7 +98,64 @@ describe("chapter 4 exercises", () => {
                     }
                 }
                 expect(prepend(8, existingList)).toEqual(newList);
+            });
+        });
+
+        describe("nth", () => {
+            const newList = () => ({
+                value: 84,
+                rest: {
+                    value: 154,
+                    rest: {
+                        value: 261,
+                        rest: {
+                            value: 343,
+                            rest: {
+                                value: 497,
+                                rest: null
+                            }
+                        }
+                    }
+                }
+            });
+
+            it("returns the value of the list node at the nth index specified", () => {
+                const list = newList();
+                expect(nth(list, 2)).toBe(261);
+            });
+
+            it("returns undefined if the index does not exist", () => {
+                const list = newList();
+                expect(nth(list, 12)).toBe(undefined);
+            });
+        });
+
+        describe("nthRecursive", () => {
+            const newList = () => ({
+                value: 84,
+                rest: {
+                    value: 154,
+                    rest: {
+                        value: 261,
+                        rest: {
+                            value: 343,
+                            rest: {
+                                value: 497,
+                                rest: null
+                            }
+                        }
+                    }
+                }
+            });
+            it("returns the value of the list node at the nth index specified", () => {
+                const list = newList()
+                expect(nthRecursive(list, 0, 2)).toBe(261);
+            });
+
+            it("returns undefined if the index does not exist", () => {
+                const list = newList();
+                expect(nthRecursive(list, 0, 10)).toBe(undefined);
             })
-        })
+        });
     });
 });

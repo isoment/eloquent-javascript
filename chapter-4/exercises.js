@@ -22,6 +22,7 @@ const range = (start, end) => {
     return array;
 }
 // console.log(range(2, 8));
+
 const sum = (array) => {
     let sum = 0;
     for (let i = 0; i < array.length; i++) {
@@ -30,6 +31,7 @@ const sum = (array) => {
     return sum;
 }
 // console.log(sum(range(1, 10)));
+
 const rangeWithStep = (start, end, step = 1) => {
     const array = [];
 
@@ -69,6 +71,7 @@ const arrayToList = (array) => {
     return list;
 }
 // console.log(arrayToList([1,2,3,4]));
+
 const listToArray = (list) => {
     let array = [];
     let current = list;
@@ -78,16 +81,8 @@ const listToArray = (list) => {
     }
     return array;
 }
-// console.log(listToArray({
-//     value: 1,
-//     rest: {
-//         value:2,
-//         rest: {
-//             value: 3,
-//             rest: null
-//         }
-//     }
-// }));
+// console.log(listToArray(arrayToList([1,2,3])));
+
 const prepend = (element, list) => {
     const newList = {
         value: element,
@@ -96,9 +91,38 @@ const prepend = (element, list) => {
     return newList;
 }
 // console.log(prepend(8, arrayToList([1,2,3])));
+
 const nth = (list, position) => {
+    let index = 0;
+    let current = list;
+    let value = undefined;
 
+    while (current != null) {
+        if (index == position) {
+            value = current.value;
+            break;
+        } else {
+            current = current.rest;
+            index++;
+        }
+    }
+
+    return value;
 }
-console.log(nth(arrayToList([20,25,30]), 1));
+// console.log(nth(arrayToList([20,25,30]), 3));
 
-export { range, sum, rangeWithStep, arrayToList, listToArray, prepend };
+const nthRecursive = (list, currentIndex, seekIndex) => {
+    if (currentIndex == seekIndex) {
+        return list.value;
+    }
+
+    if (list.rest == null) {
+        return undefined;
+    }
+
+    return nthRecursive(list.rest, currentIndex + 1, seekIndex);
+} 
+// console.log(nthRecursive(arrayToList([20,25,30]), 0, 7));
+
+
+export { range, sum, rangeWithStep, arrayToList, listToArray, prepend, nth, nthRecursive };
