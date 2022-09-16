@@ -6,7 +6,8 @@ import {
     listToArray, 
     prepend, 
     nth, 
-    nthRecursive 
+    nthRecursive,
+    deepEqualRecursive
 } from "./exercises";
 
 describe("chapter 4 exercises", () => {
@@ -49,7 +50,7 @@ describe("chapter 4 exercises", () => {
         });
     });
 
-    describe("exercise two", () => {
+    describe("exercise three", () => {
         let listFactory = () => ({
             value: 1,
             rest: {
@@ -147,6 +148,7 @@ describe("chapter 4 exercises", () => {
                     }
                 }
             });
+
             it("returns the value of the list node at the nth index specified", () => {
                 const list = newList()
                 expect(nthRecursive(list, 0, 2)).toBe(261);
@@ -156,6 +158,81 @@ describe("chapter 4 exercises", () => {
                 const list = newList();
                 expect(nthRecursive(list, 0, 10)).toBe(undefined);
             })
+        });
+    });
+
+    describe("exercise four", () => {
+        describe("deepEqualRecursive", () => {
+            it("returns true when the parameters are numbers and equal", () => {
+                expect(deepEqualRecursive(548, 548)).toBe(true);
+            });
+
+            it("returns false when the parameters are numbers and not equal", () => {
+                expect(deepEqualRecursive(743, 72)).toBe(false);
+            });
+
+            it("returns true when the parameters are strings and equal", () => {
+                expect(deepEqualRecursive('Test string', 'Test string')).toBe(true);
+            });
+
+            it("returns false when the parameters are strings and not equal", () => {
+                expect(deepEqualRecursive('This string', 'Does not match')).toBe(false);
+            });
+
+            it("returns true when the parameters are arrays and are equal", () => {
+                expect(deepEqualRecursive([1,2,3], [1,2,3])).toBe(true);
+            })
+
+            it("returns false when the parameters are arrays and are not equal", () => {
+                expect(deepEqualRecursive([1,2,35], [13,29,3])).toBe(false);
+            })
+
+            it("returns false when the parameters are null", () => {
+                expect(deepEqualRecursive(null, null)).toBe(false);
+            });
+
+            it("returns true when the parameters are objects and are equal", () => {
+                const obj1 = {
+                    a: {
+                        b: 24,
+                        c: 91
+                    },
+                    b: 'test',
+                    c: true
+                };
+
+                const obj2 = {
+                    a: {
+                        b: 24,
+                        c: 91
+                    },
+                    b: 'test',
+                    c: true
+                };
+
+                expect(deepEqualRecursive(obj1, obj2)).toBe(true);
+            });
+
+            it("returns false when the parameters are objects and are not equal", () => {
+                const obj1 = {
+                    a: {
+                        b: 24,
+                        c: 91
+                    },
+                    b: 'test',
+                    c: true
+                };
+
+                const obj2 = {
+                    a: {
+                        b: 24,
+                        c: 9
+                    },
+                    b: 'test',
+                };
+
+                expect(deepEqualRecursive(obj1, obj2)).toBe(false);
+            });
         });
     });
 });
