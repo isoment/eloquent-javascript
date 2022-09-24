@@ -1,4 +1,5 @@
-import { flatten, loop } from "./exercises";
+import { flatten, loop, everyLoop, everySome, characterScript, writingDirection } from "./exercises";
+import { SCRIPTS } from "./scripts";
 
 describe("chapter 4 exercises", () => {
     describe("exercise one", () => {
@@ -9,7 +10,6 @@ describe("chapter 4 exercises", () => {
             });
         });
     });
-
 
     describe("exercise two", () => {
         describe("loop", () => {
@@ -23,5 +23,92 @@ describe("chapter 4 exercises", () => {
                 expect(consoleSpy).toHaveBeenCalledWith(1);
             });
         });
+    });
+
+    describe("exercise three", () => {
+        describe("everyLoop", () => {
+            it("returns true if all the array elements satisfy the test", () => {
+                const array = [1,2,3,4,5,6];
+                const test = (n) => n < 10;
+                expect(everyLoop(array, test)).toBe(true);
+            });
+
+            it("returns false when not all of the array elements satisfy the test", () => {
+                const array = [1,29,3,4,55,6];
+                const test = (n) => n < 10;
+                expect(everyLoop(array, test)).toBe(false);
+            });
+        });
+
+        describe("everySome", () => {
+            it("returns true if all the array elements satisfy the test", () => {
+                const array = [1,2,3,4,5,6];
+                const test = (n) => n < 10;
+                expect(everySome(array, test)).toBe(true);
+            });
+
+            it("returns false when not all of the array elements satisfy the test", () => {
+                const array = [1,29,3,4,55,6];
+                const test = (n) => n < 10;
+                expect(everySome(array, test)).toBe(false);
+            });
+        });
+    });
+
+    describe("exercise four", () => {
+        describe("writingDirection", () => {
+            it("returns ltr when the whole script has a left to right direction", () => {
+                const scriptString = "StringПиьмдиь";
+                expect(writingDirection(scriptString)).toBe('ltr');
+            });
+
+            it("returns rtl when the whole script has a right to left direction", () => {
+                const scriptString = "هذه سلسلةیک آزمایش";
+                expect(writingDirection(scriptString)).toBe('rtl');
+            });
+
+            it("returns ttb when the whole script has a top to bottom direction", () => {
+                const scriptString = "ꡤ";
+                expect(writingDirection(scriptString)).toBe('ttb');
+            });
+
+            it("returns ltr when the dominant direction is left to right", () => {
+                const scriptString = "letꡤ";
+                expect(writingDirection(scriptString)).toBe('ltr');
+            });
+
+            it("returns rtl when the dominant direction is right to left", () => {
+                const scriptString = "strسلسلة";
+                expect(writingDirection(scriptString)).toBe('rtl');
+            });
+
+            it("returns ttb when the dominant direction is top to bottom", () => {
+                const scriptString = "tbꡤꡤꡤ";
+                expect(writingDirection(scriptString)).toBe('ttb');
+            });
+        });
+
+        describe("characterScript", () => {
+            it("returns the script for the given character code", () => {
+                const scripts = [
+                    {
+                        name: 'FakeScript1',
+                        ranges: [[100, 200], [400, 500]],
+                        direction: 'ltr'
+                    },
+                    {
+                        name: 'FakeScript3',
+                        ranges: [[800, 850], [900, 920]],
+                        direction: 'ltr'
+                    },
+                ]
+
+                expect(characterScript(scripts, 109)).toEqual({
+                    name: 'FakeScript1',
+                    ranges: [[100, 200], [400, 500]],
+                    direction: 'ltr'
+                });
+            });
+        })
     });
 });
