@@ -1,7 +1,7 @@
 import { flatten, loop, everyLoop, everySome, characterScript, writingDirection } from "./exercises";
 import { SCRIPTS } from "./scripts";
 
-describe("chapter 4 exercises", () => {
+describe("chapter 5 exercises", () => {
     describe("exercise one", () => {
         describe("flatten", () => {
             it("flattens an array of arrays into a single array", () => {
