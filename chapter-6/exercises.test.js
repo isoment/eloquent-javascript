@@ -1,4 +1,4 @@
-import Vec from "./exercises";
+import { Vec, Group } from "./exercises";
 
 describe("chapter 6 exercises", () => {
     describe("exercise one", () => {
@@ -67,7 +67,7 @@ describe("chapter 6 exercises", () => {
                     const minusResult = vec.minus(new Vec(3, 4));
                     expect(minusResult.x).toBe(2);
                     expect(minusResult.y).toBe(2);
-                })
+                });
             });
 
             describe("length", () => {
@@ -85,6 +85,106 @@ describe("chapter 6 exercises", () => {
 
                     const vecC = new Vec(-7, -4);
                     expect(vecC.length).toBe(8.06225774829855);
+                });
+            });
+        });
+    });
+
+    describe("exercise two", () => {
+        describe("Group class", () => {
+            describe("from", () => {
+                it("defines from", () => {
+                    expect(typeof Group.from).toBe("function");
+                });
+
+                it("returns an instance of the Group class", () => {
+                    expect(Group.from([1,2,3,4,5])).toBeInstanceOf(Group);
+                });
+
+                it("creates a group of unique values from a given array", () => {
+                    const group = Group.from(['a', 'a', 'b', 43, 54, 1, 65, 54]);
+                    expect(group.group).toEqual(['a', 'b', 43, 54, 1, 65]);
+                });
+            });
+
+            describe("list", () => {
+                it("defines list", () => {
+                    const group = Group.from([1, 2, 3]);
+                    expect(typeof group.list).toBe("function");
+                });
+
+                it("returns the contents of the group", () => {
+                    const group = Group.from([1, 2, 3]);
+                    expect(group.list()).toEqual([1, 2, 3]);
+                });
+            });
+
+            describe("add", () => {
+                it("defines add", () => {
+                    const group = Group.from([1, 2, 3]);
+                    expect(typeof group.add).toBe("function");
+                });
+
+                it("adds the element to the group when it does not exist", () => {
+                    const group = Group.from([1, 2, 3]);
+                    const addedElement = group.add(4);
+                    expect(addedElement).toBe(true);
+                    expect(group.group).toEqual([1, 2, 3, 4]);
+                });
+
+                it("does not add an element when it already exists in the group", () => {
+                    const group = Group.from([1, 2, 3, 'a', 'b']);
+
+                    const addedThree = group.add(3);
+                    expect(addedThree).toBe(false);
+                    expect(group.group).toEqual([1, 2, 3, 'a', 'b']);
+
+                    const addedB = group.add('b');
+                    expect(addedB).toBe(false);
+                    expect(group.group).toEqual([1, 2, 3, 'a', 'b']);
+                });
+            });
+
+            describe("delete", () => {
+                it("defines delete", () => {
+                    const group = Group.from([1, 2, 3]);
+                    expect(typeof group.delete).toBe("function");
+                });
+
+                it("deletes the element from the group", () => {
+                    const group = Group.from([1, 2, 3, 4]);
+                    const deletedElement = group.delete(4);
+                    expect(deletedElement).toBe(true);
+                    expect(group.group).toEqual([1, 2, 3]);
+                    const deletedElement2 = group.delete(2);
+                    expect(deletedElement2).toBe(true);
+                    expect(group.group).toEqual([1, 3]);
+                });
+
+                it("returns false if the element to delete does not exist", () => {
+                    const group = Group.from(['a', 'b', 1, 3]);
+                    const deletedElement = group.delete(4);
+                    expect(deletedElement).toBe(false);
+                    expect(group.group).toEqual(['a', 'b', 1, 3]);
+                })
+            });
+
+            describe("has", () => {
+                it("defines has", () => {
+                    const group = Group.from([1, 2, 3]);
+                    expect(typeof group.has).toBe("function");
+                });
+
+                it("returns true if the element exists in the group", () => {
+                    const group = Group.from([1, 2, 3]);
+                    expect(group.has(2)).toBe(true);
+                    expect(group.has(3)).toBe(true);
+                });
+
+                it("returns false if the element does not exist in the group", () => {
+                    const group = Group.from([1, 2, 3]);
+                    expect(group.has(24)).toBe(false);
+                    expect(group.has('abc')).toBe(false);
                 });
             });
         });
