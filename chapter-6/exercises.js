@@ -40,6 +40,7 @@ export class Vec {
 
 
 /*
+    -- Part 1 --
     The standard JavaScript environment provides another data structure called
     Set. Like an instance of Map, a set holds a collection of values. Unlike Map,
     it does not associate other values with those—it just tracks which values
@@ -58,6 +59,19 @@ export class Vec {
     Give the class a static from method that takes an iterable object as argument
     and creates a group that contains all the values produced by iterating
     over it.
+*/
+/*
+    -- Part 2 --
+    Make the Group class from the previous exercise iterable. Refer to the section
+    about the iterator interface earlier in the chapter if you aren’t clear on the
+    exact form of the interface anymore.
+
+    If you used an array to represent the group’s members, don’t just return
+    the iterator created by calling the Symbol.iterator method on the array. That
+    would work, but it defeats the purpose of this exercise.
+
+    It is okay if your iterator behaves strangely when the group is modified
+    during iteration.
 */
 export class Group {
     constructor(values) {
@@ -99,15 +113,29 @@ export class Group {
         });
         return new this(group);
     }
+
+    [Symbol.iterator]() {
+        let index = 0;
+        return {
+            next: () => ({
+                value: this.group[index++],
+                done: index > this.group.length ? true : false
+            })
+        }
+    }
 }
-let group = Group.from([5,87,43,5,45,12,54,84,233]);
-console.log(group.list());
-console.log(group.has(45));
-console.log(group.add(76));
-console.log(group.list());
-console.log(group.add(76));
-console.log(group.list());
-console.log(group.delete(76));
-console.log(group.list());
-console.log(group.delete(12));
-console.log(group.list());
+// let group = Group.from([5,87,43,5,45,12,54,84,233]);
+// console.log(group.list());
+// console.log(group.has(45));
+// console.log(group.add(76));
+// console.log(group.list());
+// console.log(group.add(76));
+// console.log(group.list());
+// console.log(group.delete(76));
+// console.log(group.list());
+// console.log(group.delete(12));
+// console.log(group.list());
+let groupIterator = Group.from([1, 2, 3, 4]);
+for (let value of groupIterator) {
+    console.log(value);
+}

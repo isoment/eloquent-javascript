@@ -90,7 +90,7 @@ describe("chapter 6 exercises", () => {
         });
     });
 
-    describe("exercise two", () => {
+    describe("exercise two and three", () => {
         describe("Group class", () => {
             describe("from", () => {
                 it("defines from", () => {
@@ -166,7 +166,7 @@ describe("chapter 6 exercises", () => {
                     const deletedElement = group.delete(4);
                     expect(deletedElement).toBe(false);
                     expect(group.group).toEqual(['a', 'b', 1, 3]);
-                })
+                });
             });
 
             describe("has", () => {
@@ -185,6 +185,22 @@ describe("chapter 6 exercises", () => {
                     const group = Group.from([1, 2, 3]);
                     expect(group.has(24)).toBe(false);
                     expect(group.has('abc')).toBe(false);
+                });
+            });
+
+            describe("iterator", () => {
+                it("is iterable", () => {
+                    const consoleSpy = jest.spyOn(console, 'log');
+                    const iterable = Group.from([1, 2, 3, 4]);
+                    jest.clearAllMocks();
+                    for (let value of iterable) {
+                        console.log(value);
+                    }
+                expect(consoleSpy).toHaveBeenCalledWith(1);
+                expect(consoleSpy).toHaveBeenCalledWith(2);
+                expect(consoleSpy).toHaveBeenCalledWith(3);
+                expect(consoleSpy).toHaveBeenCalledWith(4);
+                expect(consoleSpy).toHaveBeenCalledTimes(4);
                 });
             });
         });
