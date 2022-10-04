@@ -135,7 +135,21 @@ export class Group {
 // console.log(group.list());
 // console.log(group.delete(12));
 // console.log(group.list());
-let groupIterator = Group.from([1, 2, 3, 4]);
-for (let value of groupIterator) {
-    console.log(value);
-}
+// let groupIterator = Group.from([1, 2, 3, 4]);
+// for (let value of groupIterator) {
+//     console.log(value);
+// }
+
+
+/*
+    Earlier in the chapter I mentioned that an object’s hasOwnProperty can be
+    used as a more robust alternative to the in operator when you want to ignore
+    the prototype’s properties. But what if your map needs to include the word
+    "hasOwnProperty"? You won’t be able to call that method anymore because the
+    object’s own property hides the method value.
+
+    Can you think of a way to call hasOwnProperty on an object that has its own
+    property by that name?
+*/
+let map = {one: true, two: true, hasOwnProperty: false};
+console.log(Object.hasOwn(map, "hasOwnProperty"));
