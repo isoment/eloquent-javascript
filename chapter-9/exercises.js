@@ -28,18 +28,37 @@
     Refer to the table in the chapter summary for help. Test each solution
     with a few test strings.
 */
-
 export const carAndCat = (string) => {
-    const regex = /ca[rt]+/;
+    const regex = /ca[rt]/;
     return regex.test(string);
 }
 
 export const popAndProp = (string) => {
-    const regex = /pr?op+/;
+    const regex = /pr?op/;
     return regex.test(string);
 }
 
 export const matchFerrWords = (string) => {
     const regex = /ferr(et|y|ari)+/;
+    return regex.test(string);
+}
+
+export const endingInIOUS = (string) => {
+    const regex = /(ious)$/;
+    return regex.test(string);
+}
+
+export const whitespaceChar = (string) => {
+    const regex = /\s[.,:;]/;
+    return regex.test(string);
+}
+
+export const wordLongerThanSixLetters = (string) => {
+    const regex = /\b\w{7,}\b/;
+    return regex.test(string);
+}
+
+export const withoutTheLetterE = (string) => {
+    const regex = /^[^eE]+$/;
     return regex.test(string);
 }
