@@ -62,3 +62,32 @@ export const withoutTheLetterE = (string) => {
     const regex = /^[^eE]+$/;
     return regex.test(string);
 }
+
+
+/*
+    Imagine you have written a story and used single quotation marks through-
+    out to mark pieces of dialogue. Now you want to replace all the dialogue
+    quotes with double quotes, while keeping the single quotes used in 
+    contractions like aren’t.
+
+    Think of a pattern that distinguishes these two kinds of quote usage and
+    craft a call to the replace method that does the proper replacement.
+*/
+export const quoteReplace = (string) => {
+    const regex = /(^|\W)'|'(\W|$)/g;
+    return string.replace(regex, '$1"$2');
+}
+
+
+/*
+    Write an expression that matches only JavaScript-style numbers. It must sup-
+    port an optional minus or plus sign in front of the number, the decimal dot,
+    and exponent notation—5e-3 or 1E10—again with an optional sign in front
+    of the exponent. Also note that it is not necessary for there to be digits in
+    front of or after the dot, but the number cannot be a dot alone. That is, .5
+    and 5. are valid JavaScript numbers, but a lone dot isn’t.
+*/
+export const jsNumbers = (string) => {
+    const regex = /^[+\-]?(\d+(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/;
+    return regex.test(string);
+}

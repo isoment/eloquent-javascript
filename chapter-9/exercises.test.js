@@ -1,6 +1,6 @@
 import { 
     carAndCat, popAndProp, matchFerrWords, endingInIOUS, whitespaceChar, 
-    wordLongerThanSixLetters, withoutTheLetterE
+    wordLongerThanSixLetters, withoutTheLetterE, quoteReplace, jsNumbers
 } from "./exercises";
 
 describe("chapter 9 exercises", () => {
@@ -97,6 +97,25 @@ describe("chapter 9 exercises", () => {
                 expect(withoutTheLetterE('Even here is ')).toBe(false);
                 expect(withoutTheLetterE('heelo')).toBe(false);
             });
+        });
+    });
+
+    describe("exercise two", () => {
+        it("replaces single quotes with double quotes keeping contractions", () => {
+            expect(quoteReplace(`'Test string'`)).toBe(`"Test string"`);
+            expect(quoteReplace(`'I am the cook,' he said, 'right here'`)).toBe(`"I am the cook," he said, "right here"`);
+            expect(quoteReplace(`'Test's here'`)).toBe(`"Test's here"`);
+        });
+    });
+
+    describe("exercise three", () => {
+        it("matches a javascript number", () => {
+            expect(jsNumbers(4773)).toBe(true);
+            expect(jsNumbers(10e5)).toBe(true);
+            expect(jsNumbers(.7)).toBe(true);
+            expect(jsNumbers(7.)).toBe(true);
+            expect(jsNumbers(7.94378432)).toBe(true);
+            expect(jsNumbers(-2377)).toBe(true);
         });
     });
 });
